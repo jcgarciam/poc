@@ -3,11 +3,11 @@
 
 This implementation relies of an InMemory [storage](https://github.com/jcgarciam/poc/blob/master/Num26RestApi/src/main/java/com/num26/poc/services/TransactionService.java) which distribute the Transaction objects across two groups:
  1. ID    -> Transaction objects
- 2. TYPES -> List of Transaction objects
+     Get Element by Id, with access time of 'O(1)'
 
-1. Get Elements by Id, with access time of 'O(1)' 
-2. List of Ids, with access time 'O(N)' for all transactions under a given type partition.
- 
+ 2. TYPES -> List of Transaction objects
+     List of Ids, with access time 'O(N)' for all transactions under a given type partition.
+
 For the third requirement (A sum of all transactions that are transitively linked by their parentId):
 
 We rely on the following [*Transation*](https://github.com/jcgarciam/poc/blob/master/Num26RestApi/src/main/java/com/num26/poc/services/entities/Transaction.java) object
