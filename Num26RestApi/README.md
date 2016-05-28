@@ -1,14 +1,12 @@
 # Explanation
 *The rest-endpoint of this poc was tested under WildFly 10.*
 
-This implementation relies of an InMemory storage which distribute the Transaction objects across two groups:
- 1) ID    -> Transaction objects
- 2) TYPES -> List of Transaction objects
+This implementation relies of an InMemory [storage](https://github.com/jcgarciam/poc/blob/master/Num26RestApi/src/main/java/com/num26/poc/services/TransactionService.java) which distribute the Transaction objects across two groups:
+ 1. ID    -> Transaction objects
+ 2. TYPES -> List of Transaction objects
 
-[Theses two partition help us to satisfy 2 of the requirement:](https://github.com/jcgarciam/poc/blob/master/Num26RestApi/src/main/java/com/num26/poc/services/store/InMemoryTransactionStore.java)
-
-1.Get Elements by Id, with access time of 'O(1)' 
-2.List of Ids, with access time 'O(N)' for all transactions under a given type partition.
+1. Get Elements by Id, with access time of 'O(1)' 
+2. List of Ids, with access time 'O(N)' for all transactions under a given type partition.
  
 For the third requirement (A sum of all transactions that are transitively linked by their parentId):
 
