@@ -42,7 +42,7 @@ Having said that, every time we request to save a new Transaction object we make
     }
 ```
 And given that we have a Tree like structure for our Transaction object, we can flatten our structure of related children see [TransactionService](https://github.com/jcgarciam/poc/blob/master/Num26RestApi/src/main/java/com/num26/poc/services/TransactionService.java#L53):
-and using DFS Algorithm 
+using DFS Algorithm 
 ```java
     public double sumTransaction(long _id){
             Transaction root = transactionStore.findById(_id);
