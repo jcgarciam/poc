@@ -110,11 +110,15 @@ public class TransactionServiceTest {
 
     @Test
     public void shouldTestSumWithLargeRelatedTransactions(){
+        //given
         long max = 999999;
         LongStream
                 .range(1, max)
                 .forEach(i -> transactionService.save(i, new TransactionDTO(1.0, "car", i - 1)));
+        //when
         double sum1 = transactionService.sumTransaction(1);
+
+        //then
         Assert.assertThat(sum1, Is.is((double)max - 1));
     }
 }
