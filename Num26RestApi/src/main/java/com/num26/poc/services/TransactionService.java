@@ -6,8 +6,10 @@ import com.num26.poc.services.store.TransactionStore;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.util.HashSet;
 import java.util.Objects;
-import java.util.stream.Stream;
+import java.util.Set;
+import java.util.Stack;
 
 /**
  */
@@ -55,12 +57,21 @@ public class TransactionService {
         if(root == null){
             return 0;
         }
-        return recursiveFlat(root).mapToDouble(f -> f.getAmount()).sum();
-    }
+        Set<Long> visited = new HashSet<>();
+        Stack<Transaction> elements = new Stack<>();
+        elements.push(root);
+        double sum = 0;
+        while(!elements.empty()){
+            Transaction popped = elements.pop();
+            visited.add(popped.getId());
+            sum += popped.getAmount();
 
-    private Stream<Transaction> recursiveFlat(final Transaction _transaction) {
-        return Stream.concat(
-                Stream.of(_transaction),
-                _transaction.getChildren().flatMap(this::recursiveFlat));
+            popped.getChildren().forEach(m-> {
+                if(!visited.contains(m.getId())){
+                    elements.push(m);
+                }
+            });
+        }
+        return sum;
     }
 }

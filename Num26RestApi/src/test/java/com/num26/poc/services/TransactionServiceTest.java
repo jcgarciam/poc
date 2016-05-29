@@ -9,6 +9,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.stream.LongStream;
+
 /**
  */
 public class TransactionServiceTest {
@@ -104,5 +106,15 @@ public class TransactionServiceTest {
         Assert.assertThat(tids2.length, Is.is(1));
         Assert.assertThat(tids3.length, Is.is(0));
 
+    }
+
+    @Test
+    public void shouldTestSumLargeRelatedTransactions(){
+        long max = 950000;
+        LongStream
+                .range(1, max)
+                .forEach(i -> transactionService.save(i, new TransactionDTO(1.0, "car", i - 1)));
+        double sum1 = transactionService.sumTransaction(1);
+        Assert.assertThat(sum1, Is.is((double)max - 1));
     }
 }
