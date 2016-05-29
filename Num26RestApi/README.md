@@ -67,3 +67,6 @@ and using DFS Algorithm
             return sum;
         }
 ```
+
+See [TransactionServiceTest.java](https://github.com/jcgarciam/poc/blob/master/Num26RestApi/src/test/java/com/num26/poc/services/TransactionServiceTest.java) to check each
+requirement.

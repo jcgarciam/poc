@@ -109,8 +109,8 @@ public class TransactionServiceTest {
     }
 
     @Test
-    public void shouldTestSumLargeRelatedTransactions(){
-        long max = 950000;
+    public void shouldTestSumWithLargeRelatedTransactions(){
+        long max = 999999;
         LongStream
                 .range(1, max)
                 .forEach(i -> transactionService.save(i, new TransactionDTO(1.0, "car", i - 1)));
